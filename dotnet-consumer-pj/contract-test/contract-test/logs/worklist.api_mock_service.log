@@ -1,0 +1,63 @@
+I, [2021-12-05T15:50:25.798251 #10760]  INFO -- : Cleared interactions for example ""
+I, [2021-12-05T15:50:25.879251 #10760]  INFO -- : Registered expected interaction GET /api/v1.0/orders
+D, [2021-12-05T15:50:25.879251 #10760] DEBUG -- : {
+  "description": "get request to orders able to create worklist",
+  "request": {
+    "method": "get",
+    "path": "/api/v1.0/orders",
+    "headers": {
+      "Accept": "application/json, text/json, text/x-json, text/javascript, application/xml, text/xml"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "body": [
+      {
+        "Code": "123",
+        "Number": 123
+      },
+      {
+        "Code": "124",
+        "Number": 124
+      }
+    ]
+  },
+  "metadata": null
+}
+I, [2021-12-05T15:50:25.910250 #10760]  INFO -- : Received request GET /api/v1.0/orders
+D, [2021-12-05T15:50:25.910250 #10760] DEBUG -- : {
+  "path": "/api/v1.0/orders",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Host": "localhost:5154",
+    "Accept": "application/json, text/json, text/x-json, text/javascript, application/xml, text/xml",
+    "User-Agent": "RestSharp/106.13.0.0",
+    "Connection": "Keep-Alive",
+    "Accept-Encoding": "gzip, deflate",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2021-12-05T15:50:25.911250 #10760]  INFO -- : Found matching response for GET /api/v1.0/orders
+D, [2021-12-05T15:50:25.911250 #10760] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8"
+  },
+  "body": [
+    {
+      "Code": "123",
+      "Number": 123
+    },
+    {
+      "Code": "124",
+      "Number": 124
+    }
+  ]
+}
+I, [2021-12-05T15:50:25.941251 #10760]  INFO -- : Verifying - interactions matched for example ""
+I, [2021-12-05T15:50:25.956252 #10760]  INFO -- : Writing pact for WorkList.Api to C:/Users/Tunahan YILMAZ/Desktop/cdt/dotnet-consumer-pj/contract-test/contract-test/pacts/worklist.service-worklist.api.json
+I, [2021-12-05T15:50:25.971250 #10760]  INFO -- : Cleared interactions for example ""

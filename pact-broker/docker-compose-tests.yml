@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres
+    healthcheck:
+      test: psql postgres --command "select 1" -U postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+  pact-broker:
+    image: pactfoundation/pact-broker:latest
+    depends_on:
+      - postgres
+    environment:
+      PACT_BROKER_PORT: "9292"
+      PACT_BROKER_DATABASE_URL: "postgres://postgres:postgres@postgres/postgres"
+      PACT_BROKER_LOG_LEVEL: INFO
+      PACT_BROKER_SQL_LOG_LEVEL: DEBUG
+      PACT_BROKER_BASIC_AUTH_USERNAME: "${PACT_BROKER_BASIC_AUTH_USERNAME:-}"
+      PACT_BROKER_BASIC_AUTH_PASSWORD: "${PACT_BROKER_BASIC_AUTH_PASSWORD:-}"
+      PACT_BROKER_PUBLIC_HEARTBEAT: "${PACT_BROKER_PUBLIC_HEARTBEAT:-false}"
+      PACT_BROKER_DATABASE_CONNECT_MAX_RETRIES: "10"
+
+  sut:
+    build:
+      context: test
+    depends_on:
+      - pact-broker
+    working_dir: /home
+    environment:
+      TEST_URL: http://pact-broker:9292
+      PACT_BROKER_BASIC_AUTH_USERNAME: "${PACT_BROKER_BASIC_AUTH_USERNAME}"
+      PACT_BROKER_BASIC_AUTH_PASSWORD: "${PACT_BROKER_BASIC_AUTH_PASSWORD}"
+      PACT_BROKER_PORT: "9292"
+    entrypoint: dockerize -wait http://pact-broker:9292/diagnostic/status/heartbeat -timeout 20s /home/test.sh

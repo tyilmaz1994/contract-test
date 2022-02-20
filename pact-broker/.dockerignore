@@ -1,0 +1,9 @@
+.git
+.bundle
+.bin
+test.sh
+*.md
+.gitkeep
+pact_broker/pact_broker.sqlite
+tmp
+.data
